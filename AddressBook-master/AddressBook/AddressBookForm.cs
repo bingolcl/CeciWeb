@@ -43,7 +43,8 @@ namespace AddressBook
             postalCodeTextBox.Enabled = enabled;
 			phoneNumberPrimaryTextBox.Enabled = enabled;
 			phoneNumberAlternateTextBox.Enabled = enabled;
-			//cobProv.Enabled = enabled;
+            //cobProv.Enabled = enabled;
+            btnCancel.Enabled = enabled;
 			saveContactButton.Enabled = enabled;
 			birthdayDateTimePicker.Enabled = enabled;
 			emailTextBox.Enabled = enabled;
@@ -144,8 +145,14 @@ namespace AddressBook
 
 			AddressBook.SaveToDataFile();
 		}
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            /* Repopulate the data to show any changes from the saving process */
+            PopulateEditControls(AddressBook.Instance.Contacts[contactListBox.SelectedIndex]);
+            SetComponentControlsEnabled(AddressBookFormGUIComponents.ContactListBox);
+        }
 
-		private void contactListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void contactListBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (contactListBox.SelectedIndex == -1)
 			{
@@ -210,6 +217,8 @@ namespace AddressBook
 			selectedContact.Portrait = null;
 			portraitPictureBox.Image = selectedContact.Portrait;
 		}
-		#endregion
-	}
+        #endregion
+
+
+    }
 }

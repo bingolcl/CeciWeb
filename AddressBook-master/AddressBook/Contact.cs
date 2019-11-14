@@ -82,7 +82,7 @@ namespace AddressBook
 
 		private static String GetPostalCodeIfValid(String source)
 		{
-			return Utilities.getRegexMatch(source, @"^\d{5}$"); /* Postal codes are 5-digit numbers */
+			return Utilities.getRegexMatch(source, @"^([0-9]{5}|[A-Z][0-9][A-Z] ?[0-9][A-Z][0-9])$"); /* Postal codes are 5-digit numbers */
 		}
 
 		private static String GetPhoneNumberIfValid(String source)

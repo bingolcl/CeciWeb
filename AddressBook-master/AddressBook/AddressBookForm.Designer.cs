@@ -39,6 +39,9 @@
             this.deletePhotoButton = new System.Windows.Forms.Button();
             this.selectPhotoButton = new System.Windows.Forms.Button();
             this.contactInfoPanel = new System.Windows.Forms.Panel();
+            this.txtCountry = new System.Windows.Forms.TextBox();
+            this.txtProvince = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.saveContactButton = new System.Windows.Forms.Button();
@@ -64,9 +67,7 @@
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.portraitPictureBox = new System.Windows.Forms.PictureBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtProvince = new System.Windows.Forms.TextBox();
-            this.txtCountry = new System.Windows.Forms.TextBox();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -184,6 +185,7 @@
             // contactInfoPanel
             // 
             this.contactInfoPanel.AllowDrop = true;
+            this.contactInfoPanel.Controls.Add(this.btnCancel);
             this.contactInfoPanel.Controls.Add(this.txtCountry);
             this.contactInfoPanel.Controls.Add(this.txtProvince);
             this.contactInfoPanel.Controls.Add(this.label13);
@@ -216,6 +218,31 @@
             this.contactInfoPanel.Size = new System.Drawing.Size(542, 203);
             this.contactInfoPanel.TabIndex = 1;
             // 
+            // txtCountry
+            // 
+            this.txtCountry.Enabled = false;
+            this.txtCountry.Location = new System.Drawing.Point(341, 84);
+            this.txtCountry.Name = "txtCountry";
+            this.txtCountry.Size = new System.Drawing.Size(198, 20);
+            this.txtCountry.TabIndex = 25;
+            // 
+            // txtProvince
+            // 
+            this.txtProvince.Enabled = false;
+            this.txtProvince.Location = new System.Drawing.Point(341, 58);
+            this.txtProvince.Name = "txtProvince";
+            this.txtProvince.Size = new System.Drawing.Size(198, 20);
+            this.txtProvince.TabIndex = 24;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(290, 86);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 13);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Country";
+            // 
             // emailTextBox
             // 
             this.emailTextBox.Enabled = false;
@@ -234,13 +261,15 @@
             // 
             // saveContactButton
             // 
+            this.saveContactButton.BackColor = System.Drawing.Color.SkyBlue;
             this.saveContactButton.Enabled = false;
-            this.saveContactButton.Location = new System.Drawing.Point(464, 180);
+            this.saveContactButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveContactButton.Location = new System.Drawing.Point(383, 180);
             this.saveContactButton.Name = "saveContactButton";
             this.saveContactButton.Size = new System.Drawing.Size(75, 23);
             this.saveContactButton.TabIndex = 0;
             this.saveContactButton.Text = "Save";
-            this.saveContactButton.UseVisualStyleBackColor = true;
+            this.saveContactButton.UseVisualStyleBackColor = false;
             this.saveContactButton.Click += new System.EventHandler(this.saveContactButton_Click);
             // 
             // postalCodeTextBox
@@ -436,30 +465,16 @@
             this.portraitPictureBox.TabIndex = 0;
             this.portraitPictureBox.TabStop = false;
             // 
-            // label13
+            // btnCancel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(290, 86);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(43, 13);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "Country";
-            // 
-            // txtProvince
-            // 
-            this.txtProvince.Enabled = false;
-            this.txtProvince.Location = new System.Drawing.Point(341, 58);
-            this.txtProvince.Name = "txtProvince";
-            this.txtProvince.Size = new System.Drawing.Size(198, 20);
-            this.txtProvince.TabIndex = 24;
-            // 
-            // txtCountry
-            // 
-            this.txtCountry.Enabled = false;
-            this.txtCountry.Location = new System.Drawing.Point(341, 84);
-            this.txtCountry.Name = "txtCountry";
-            this.txtCountry.Size = new System.Drawing.Size(198, 20);
-            this.txtCountry.TabIndex = 25;
+            this.btnCancel.Enabled = false;
+            this.btnCancel.Location = new System.Drawing.Point(464, 180);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 26;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // AddressBookForm
             // 
@@ -525,6 +540,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.TextBox txtProvince;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
 
