@@ -223,7 +223,7 @@ namespace AddressBook
 		{
 			Contact selectedContact = AddressBook.Instance.Contacts[contactListBox.SelectedIndex];
             string exeFile = (new System.Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
-            string exeDir = Path.GetDirectoryName(exeFile);
+            string exeDir = Path.GetDirectoryName(exeFile).Replace("\\", "/").Replace("%20", " ");
             using (OpenFileDialog dialog = new OpenFileDialog())
 			{
 				DialogResult result = dialog.ShowDialog();
@@ -292,7 +292,7 @@ namespace AddressBook
         {
             Contact selectedContact = AddressBook.Instance.Contacts[contactListBox.SelectedIndex];
             string exeFile = (new System.Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
-            string exeDir = Path.GetDirectoryName(exeFile);
+            string exeDir = Path.GetDirectoryName(exeFile).Replace("\\", "/").Replace("%20", " ");
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
                 DialogResult result = dialog.ShowDialog();
@@ -326,7 +326,7 @@ namespace AddressBook
         private void listFiles_DoubleClick(object sender, EventArgs e)
         {
             string exeFile = (new System.Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
-            string exeDir = Path.GetDirectoryName(exeFile);
+            string exeDir = Path.GetDirectoryName(exeFile).Replace("\\", "/").Replace("%20", " ");
             string file = listFiles.SelectedItem.ToString();
             string fullFileName = Path.Combine(exeDir+ "/files/", file);            
             var confirmResult = MessageBox.Show($"Do you want to open file: {file} ?",
