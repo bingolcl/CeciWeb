@@ -1,7 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook", "AddressBook\AddressBook.csproj", "{2C9F2DEA-A551-4E5E-ADC7-BED287EBA65F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{DA5792B0-4D49-4C7F-B36C-1FA6DCDD86BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +17,13 @@ Global
 		{2C9F2DEA-A551-4E5E-ADC7-BED287EBA65F}.Debug|x86.Build.0 = Debug|x86
 		{2C9F2DEA-A551-4E5E-ADC7-BED287EBA65F}.Release|x86.ActiveCfg = Release|x86
 		{2C9F2DEA-A551-4E5E-ADC7-BED287EBA65F}.Release|x86.Build.0 = Release|x86
+		{DA5792B0-4D49-4C7F-B36C-1FA6DCDD86BF}.Debug|x86.ActiveCfg = Debug
+		{DA5792B0-4D49-4C7F-B36C-1FA6DCDD86BF}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68BD64E8-89B8-455F-90D9-F820F0FADA51}
 	EndGlobalSection
 EndGlobal
