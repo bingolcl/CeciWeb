@@ -35,12 +35,11 @@
             this.deleteContactButton = new System.Windows.Forms.Button();
             this.addContactButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.mapPictureBox = new System.Windows.Forms.PictureBox();
             this.deletePhotoButton = new System.Windows.Forms.Button();
             this.selectPhotoButton = new System.Windows.Forms.Button();
             this.contactInfoPanel = new System.Windows.Forms.Panel();
+            this.cobProv = new System.Windows.Forms.ComboBox();
             this.txtCountry = new System.Windows.Forms.TextBox();
-            this.txtProvince = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -66,15 +65,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.portraitPictureBox = new System.Windows.Forms.PictureBox();
+            this.deleteFileButton = new System.Windows.Forms.Button();
+            this.selectFileButton = new System.Windows.Forms.Button();
+            this.listPhotos = new System.Windows.Forms.ListBox();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.listFiles = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapPictureBox)).BeginInit();
             this.contactInfoPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.portraitPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // contactListBox
@@ -102,11 +102,13 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.mapPictureBox);
+            this.splitContainer1.Panel2.Controls.Add(this.listFiles);
+            this.splitContainer1.Panel2.Controls.Add(this.listPhotos);
+            this.splitContainer1.Panel2.Controls.Add(this.deleteFileButton);
+            this.splitContainer1.Panel2.Controls.Add(this.selectFileButton);
             this.splitContainer1.Panel2.Controls.Add(this.deletePhotoButton);
             this.splitContainer1.Panel2.Controls.Add(this.selectPhotoButton);
             this.splitContainer1.Panel2.Controls.Add(this.contactInfoPanel);
-            this.splitContainer1.Panel2.Controls.Add(this.portraitPictureBox);
             this.splitContainer1.Size = new System.Drawing.Size(797, 506);
             this.splitContainer1.SplitterDistance = 241;
             this.splitContainer1.TabIndex = 3;
@@ -150,16 +152,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Contacts";
             // 
-            // mapPictureBox
-            // 
-            this.mapPictureBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.mapPictureBox.Location = new System.Drawing.Point(277, 4);
-            this.mapPictureBox.Name = "mapPictureBox";
-            this.mapPictureBox.Size = new System.Drawing.Size(268, 268);
-            this.mapPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.mapPictureBox.TabIndex = 5;
-            this.mapPictureBox.TabStop = false;
-            // 
             // deletePhotoButton
             // 
             this.deletePhotoButton.Enabled = false;
@@ -167,7 +159,7 @@
             this.deletePhotoButton.Name = "deletePhotoButton";
             this.deletePhotoButton.Size = new System.Drawing.Size(75, 23);
             this.deletePhotoButton.TabIndex = 4;
-            this.deletePhotoButton.Text = "Clear Photo";
+            this.deletePhotoButton.Text = "Remove Image";
             this.deletePhotoButton.UseVisualStyleBackColor = true;
             this.deletePhotoButton.Click += new System.EventHandler(this.deletePhotoButton_Click);
             // 
@@ -178,7 +170,7 @@
             this.selectPhotoButton.Name = "selectPhotoButton";
             this.selectPhotoButton.Size = new System.Drawing.Size(83, 23);
             this.selectPhotoButton.TabIndex = 3;
-            this.selectPhotoButton.Text = "Select Photo";
+            this.selectPhotoButton.Text = "Select Image";
             this.selectPhotoButton.UseVisualStyleBackColor = true;
             this.selectPhotoButton.Click += new System.EventHandler(this.selectPhotoButton_Click);
             // 
@@ -186,8 +178,8 @@
             // 
             this.contactInfoPanel.AllowDrop = true;
             this.contactInfoPanel.Controls.Add(this.btnCancel);
+            this.contactInfoPanel.Controls.Add(this.cobProv);
             this.contactInfoPanel.Controls.Add(this.txtCountry);
-            this.contactInfoPanel.Controls.Add(this.txtProvince);
             this.contactInfoPanel.Controls.Add(this.label13);
             this.contactInfoPanel.Controls.Add(this.emailTextBox);
             this.contactInfoPanel.Controls.Add(this.label14);
@@ -218,6 +210,14 @@
             this.contactInfoPanel.Size = new System.Drawing.Size(542, 203);
             this.contactInfoPanel.TabIndex = 1;
             // 
+            // cobProv
+            // 
+            this.cobProv.FormattingEnabled = true;
+            this.cobProv.Location = new System.Drawing.Point(341, 58);
+            this.cobProv.Name = "cobProv";
+            this.cobProv.Size = new System.Drawing.Size(198, 21);
+            this.cobProv.TabIndex = 26;
+            // 
             // txtCountry
             // 
             this.txtCountry.Enabled = false;
@@ -225,14 +225,6 @@
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(198, 20);
             this.txtCountry.TabIndex = 25;
-            // 
-            // txtProvince
-            // 
-            this.txtProvince.Enabled = false;
-            this.txtProvince.Location = new System.Drawing.Point(341, 58);
-            this.txtProvince.Name = "txtProvince";
-            this.txtProvince.Size = new System.Drawing.Size(198, 20);
-            this.txtProvince.TabIndex = 24;
             // 
             // label13
             // 
@@ -261,15 +253,13 @@
             // 
             // saveContactButton
             // 
-            this.saveContactButton.BackColor = System.Drawing.Color.SkyBlue;
             this.saveContactButton.Enabled = false;
-            this.saveContactButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveContactButton.Location = new System.Drawing.Point(383, 180);
+            this.saveContactButton.Location = new System.Drawing.Point(383, 177);
             this.saveContactButton.Name = "saveContactButton";
             this.saveContactButton.Size = new System.Drawing.Size(75, 23);
             this.saveContactButton.TabIndex = 0;
             this.saveContactButton.Text = "Save";
-            this.saveContactButton.UseVisualStyleBackColor = false;
+            this.saveContactButton.UseVisualStyleBackColor = true;
             this.saveContactButton.Click += new System.EventHandler(this.saveContactButton_Click);
             // 
             // postalCodeTextBox
@@ -455,26 +445,56 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Last Name";
             // 
-            // portraitPictureBox
+            // deleteFileButton
             // 
-            this.portraitPictureBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.portraitPictureBox.Location = new System.Drawing.Point(3, 4);
-            this.portraitPictureBox.Name = "portraitPictureBox";
-            this.portraitPictureBox.Size = new System.Drawing.Size(268, 268);
-            this.portraitPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.portraitPictureBox.TabIndex = 0;
-            this.portraitPictureBox.TabStop = false;
+            this.deleteFileButton.Enabled = false;
+            this.deleteFileButton.Location = new System.Drawing.Point(471, 274);
+            this.deleteFileButton.Name = "deleteFileButton";
+            this.deleteFileButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteFileButton.TabIndex = 7;
+            this.deleteFileButton.Text = "Remove File";
+            this.deleteFileButton.UseVisualStyleBackColor = true;
+            this.deleteFileButton.Click += new System.EventHandler(this.deleteFileButton_Click);
+            // 
+            // selectFileButton
+            // 
+            this.selectFileButton.Enabled = false;
+            this.selectFileButton.Location = new System.Drawing.Point(382, 274);
+            this.selectFileButton.Name = "selectFileButton";
+            this.selectFileButton.Size = new System.Drawing.Size(83, 23);
+            this.selectFileButton.TabIndex = 6;
+            this.selectFileButton.Text = "Select File";
+            this.selectFileButton.UseVisualStyleBackColor = true;
+            this.selectFileButton.Click += new System.EventHandler(this.selectFileButton_Click);
+            // 
+            // listPhotos
+            // 
+            this.listPhotos.FormattingEnabled = true;
+            this.listPhotos.Location = new System.Drawing.Point(3, 3);
+            this.listPhotos.Name = "listPhotos";
+            this.listPhotos.Size = new System.Drawing.Size(268, 264);
+            this.listPhotos.TabIndex = 8;
+            this.listPhotos.DoubleClick += new System.EventHandler(this.listPhotos_DoubleClick);
             // 
             // btnCancel
             // 
             this.btnCancel.Enabled = false;
-            this.btnCancel.Location = new System.Drawing.Point(464, 180);
+            this.btnCancel.Location = new System.Drawing.Point(464, 177);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 26;
+            this.btnCancel.TabIndex = 27;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // listFiles
+            // 
+            this.listFiles.FormattingEnabled = true;
+            this.listFiles.Location = new System.Drawing.Point(277, 4);
+            this.listFiles.Name = "listFiles";
+            this.listFiles.Size = new System.Drawing.Size(268, 264);
+            this.listFiles.TabIndex = 9;
+            this.listFiles.DoubleClick += new System.EventHandler(this.listFiles_DoubleClick);
             // 
             // AddressBookForm
             // 
@@ -492,10 +512,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mapPictureBox)).EndInit();
             this.contactInfoPanel.ResumeLayout(false);
             this.contactInfoPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.portraitPictureBox)).EndInit();
             this.ResumeLayout(false);
 
 		}
@@ -515,7 +533,6 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox lastNameTextBox;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.PictureBox portraitPictureBox;
 		private System.Windows.Forms.TextBox postalCodeTextBox;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label11;
@@ -536,11 +553,14 @@
 		private System.Windows.Forms.Label label14;
 		private System.Windows.Forms.Button selectPhotoButton;
 		private System.Windows.Forms.Button deletePhotoButton;
-		private System.Windows.Forms.PictureBox mapPictureBox;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtCountry;
-        private System.Windows.Forms.TextBox txtProvince;
+        private System.Windows.Forms.ComboBox cobProv;
+        private System.Windows.Forms.Button deleteFileButton;
+        private System.Windows.Forms.Button selectFileButton;
+        private System.Windows.Forms.ListBox listPhotos;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ListBox listFiles;
     }
 }
 

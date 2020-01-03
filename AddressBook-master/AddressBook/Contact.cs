@@ -1,10 +1,15 @@
-﻿using System;
+﻿using LINQtoCSV;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 
 namespace AddressBook
 {
+
 	[SerializableAttribute]
-	class Contact : IComparable
+    public class Contact : IComparable
 	{
 		private String _lastName;
 		private String _firstName;
@@ -12,7 +17,8 @@ namespace AddressBook
 		private String _address;
 		private String _addressExt;
 		private String _city;
-		private String _province;
+        private String _prov;
+		private CA_Province _province;
 		private String _country;
         private US_State _state;
 		private String _postalCode;
@@ -20,7 +26,10 @@ namespace AddressBook
 		private String _phoneAlternate;
 		private DateTime _birthday;
 		private Image _portrait;
-		private String _email;
+		private List<Image> _portraits = new List<Image>();
+		private string[] _filePaths;
+		private string[] _imagePaths;
+        private String _email;
 		private Image _mapImage;
 
 		public Contact()
@@ -51,7 +60,7 @@ namespace AddressBook
         /// <returns>true if data is properly formatted, false otherwise</returns>
         public void Save(String lastName, String firstName,
 			String middleInitial, String address, String addressExt,
-			String city, String province, String country, String postalCode,
+			String city, CA_Province province, String country, String postalCode,
 			String phonePrimary, String phoneAlternate, DateTime birthday,
 			String email)
 		{
@@ -62,7 +71,7 @@ namespace AddressBook
 			_address = address.Trim();
 			_addressExt = addressExt.Trim();
 			_city = city.Trim();
-			_province = province.Trim();
+			_province = province;
 			_country = country.Trim();
             //_state = state;
             _birthday = birthday;
@@ -82,7 +91,7 @@ namespace AddressBook
 
 		private static String GetPostalCodeIfValid(String source)
 		{
-			return Utilities.getRegexMatch(source, @"^([0-9]{5}|[A-Z][0-9][A-Z] ?[0-9][A-Z][0-9])$"); /* Postal codes are 5-digit numbers */
+			return Utilities.getRegexMatch(source, @"^\d{5}$"); /* Postal codes are 5-digit numbers */
 		}
 
 		private static String GetPhoneNumberIfValid(String source)
@@ -123,96 +132,126 @@ namespace AddressBook
 			return result;
 		}
 
-		#endregion
+        #endregion
 
-		#region Properties
-
-		public String Name
+        #region Properties
+        public String Name
 		{
 			get { return String.Format("{0}, {1} {2}.", _lastName, _firstName, _middleInitial); }
 		}
-
-		public String LastName
+        [CsvColumn(Name = "LastName")]
+        public String LastName
 		{
 			get { return _lastName; }
 		}
-
-		public String FirstName
+        [CsvColumn(Name = "FirstName")]
+        public String FirstName
 		{
 			get { return _firstName; }
 		}
-
-		public String MiddleInitial
+        [CsvColumn(Name = "MiddleInitial")]
+        public String MiddleInitial
 		{
 			get { return _middleInitial; }
 		}
-
-		public String Address
+        [CsvColumn(Name = "Address")]
+        public String Address
 		{
 			get { return _address; }
 		}
-
-		public String AddressExt
+        [CsvColumn(Name = "AddressExt")]
+        public String AddressExt
 		{
 			get { return _addressExt; }
 		}
-
-		public String City
+        [CsvColumn(Name = "City")]
+        public String City
 		{
 			get { return _city; }
 		}
-
-        public String Province
+        public CA_Province Province
         {
             get { return _province; }
         }
-
+        [CsvColumn(Name = "Province")]
+        public string Prov
+        {
+            get { return _province.Name; }
+        }
+        //public String Province
+        //{
+        //    get { return _province; }
+        //}
+        [CsvColumn(Name = "Country")]
         public String Country
         {
             get { return _country; }
         }
 
-        public US_State State
-		{
-			get { return _state; }
-		}
+  //      public US_State State
+		//{
+		//	get { return _state; }
+		//}
 
-		public String PostalCode
+        [CsvColumn(Name = "PostalCode")]
+        public String PostalCode
 		{
 			get { return _postalCode; }
 		}
-
-		public DateTime Birthday
+        [CsvColumn(Name = "Birthday", OutputFormat = "dd MMM yy")]
+        public DateTime Birthday
 		{
 			get { return _birthday; }
 		}
-
-		public String PhonePrimary
+        [CsvColumn(Name = "PhonePrimary")]
+        public String PhonePrimary
 		{
 			get { return _phonePrimary; }
 		}
-
-		public String PhoneAlternate
+        [CsvColumn(Name = "PhoneAlternate")]
+        public String PhoneAlternate
 		{
 			get { return _phoneAlternate; }
 		}
-
-		public Image Portrait
+        public Image[] Portraits
 		{
-			get { return _portrait; }
-			set { _portrait = value; }
+			get { return _portraits.ToArray(); }
+			set { _portraits = value.ToList(); }
 		}
-
-		public String Email
+        public string[] ImagePaths
+        {
+            get { return _imagePaths; }
+            set { _imagePaths = value; }
+        }
+        public string[] FilePaths
+        {
+            get { return _filePaths; }
+            set { _filePaths = value; }
+        }
+        [CsvColumn(Name = "Email")]
+        public String Email
 		{
 			get { return _email; }
 		}
-
-		public Image MapImage
+        public Image MapImage
 		{
 			get { return _mapImage; }
 		}
 
-		#endregion
-	}
+        public String[] GetFileName(string[] paths)
+        {
+            List<String> names = new List<String>();
+            if (paths != null)
+            {
+                foreach (string path in paths)
+                {
+                    names.Add(Path.GetFileName(path));
+                }
+            }
+
+            return names.ToArray();
+        }
+
+        #endregion
+    }
 }

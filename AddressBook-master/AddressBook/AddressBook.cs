@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using LINQtoCSV;
+using System.Linq;
 
 namespace AddressBook
 {
@@ -11,29 +13,62 @@ namespace AddressBook
 
 		private static AddressBook instance;
 
-		private AddressBook()
-		{
-			_contacts = new List<Contact>();
+        /* Populate contacts from data */
+        private AddressBook()
+        {
+            _contacts = new List<Contact>();
 
-			/* Populate contacts from data */
-			BinaryFormatter formatter = new BinaryFormatter();
-			FileStream stream = new FileStream("Contacts.dat", FileMode.OpenOrCreate);
-			try
-			{
-				if (stream.Length > 0)
-				{
-					_contacts = (List<Contact>)formatter.Deserialize(stream);
-				}
-			}
-			finally
-			{
-				stream.Close();
-			}
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream("Contacts.dat", FileMode.OpenOrCreate);
+            try
+            {
+                if (stream.Length > 0)
+                {
+                    _contacts = (List<Contact>)formatter.Deserialize(stream);
+                }
+            }
+            finally
+            {
+                stream.Close();
+            }
 
-			_contacts.Sort();
-		}
+            _contacts.Sort();
+        }
 
-		public static AddressBook Instance
+        /* Populate contacts from CSV */
+        //private AddressBook()
+        //{
+        //    _contacts = new List<Contact>();
+
+        //    CsvFileDescription inputFileDescription = new CsvFileDescription
+        //    {
+        //        SeparatorChar = ',', // comma delimited
+        //        FirstLineHasColumnNames = true, // column names in first record
+        //        EnforceCsvColumnAttribute = true // Read and write only reads data fields into public fields and properties with the [CsvColumn] attribute
+        //    };
+        //    CsvContext cc = new CsvContext();
+        //    try
+        //    {
+        //        if (File.Exists("Contacts.csv"))
+        //        {
+        //            IEnumerable<Contact> contacts = cc.Read<Contact>("Contacts.csv", inputFileDescription);
+        //            if (contacts != null && contacts.Any())
+        //            {
+        //                _contacts = contacts.ToList();
+        //            }
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+
+        //    _contacts.Sort();
+        //}
+
+
+        public static AddressBook Instance
 		{
 			get
 			{
@@ -91,11 +126,38 @@ namespace AddressBook
 			}
 		}
 
-		/// <summary>
-		/// Remove a contact from the AddressBook
-		/// </summary>
-		/// <param name="contact"></param>
-		public static void Remove(Contact contact)
+        /// <summary>
+        /// Save all contact data to the program's internal CSV file
+        /// </summary>
+        public static void SaveToCSVFile()
+        {
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                SeparatorChar = ',', // comma delimited
+                FirstLineHasColumnNames = true, // column names in first record
+                EnforceCsvColumnAttribute = true // Read and write only reads data fields into public fields and properties with the [CsvColumn] attribute
+            };
+            CsvContext cc = new CsvContext();
+
+            try
+            {
+                cc.Write(
+                    Instance.Contacts,
+                    "Contacts.csv",
+                    outputFileDescription
+                    );
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Remove a contact from the AddressBook
+        /// </summary>
+        /// <param name="contact"></param>
+        public static void Remove(Contact contact)
 		{
 			Instance._contacts.Remove(contact);
 			Instance._contacts.Sort();
@@ -116,8 +178,8 @@ namespace AddressBook
 				return names;
 			}
 		}
-	
-		public List<Contact> Contacts
+
+        public List<Contact> Contacts
 		{
 			get { return _contacts; }
 		}
