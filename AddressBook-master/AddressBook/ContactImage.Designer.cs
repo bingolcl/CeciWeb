@@ -50,8 +50,8 @@
             this.Controls.Add(this.ptbContact);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ContactImage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ContactImage";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ptbContact)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
