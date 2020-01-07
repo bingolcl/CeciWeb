@@ -33,6 +33,38 @@ namespace AddressBook
             }
 
             _contacts.Sort();
+
+            _events = new List<Event>();
+            stream = new FileStream("Events.dat", FileMode.OpenOrCreate);
+            try
+            {
+                if (stream.Length > 0)
+                {
+                    _events = (List<Event>)formatter.Deserialize(stream);
+                }
+            }
+            finally
+            {
+                stream.Close();
+            }
+
+            _events.Sort();
+
+            _cases = new List<Case>();
+            stream = new FileStream("Cases.dat", FileMode.OpenOrCreate);
+            try
+            {
+                if (stream.Length > 0)
+                {
+                    _cases = (List<Case>)formatter.Deserialize(stream);
+                }
+            }
+            finally
+            {
+                stream.Close();
+            }
+
+            _cases.Sort();
         }
 
         /* Populate contacts from CSV */
@@ -84,12 +116,14 @@ namespace AddressBook
 		#endregion
 
 		private List<Contact> _contacts;
+		private List<Event> _events;
+		private List<Case> _cases;
 
-		/// <summary>
-		/// Add a new contact to the Address Book
-		/// </summary>
-		/// <returns>Array index of the newly added Contact</returns>
-		public static int Add()
+        /// <summary>
+        /// Add a new contact to the Address Book
+        /// </summary>
+        /// <returns>Array index of the newly added Contact</returns>
+        public static int Add()
 		{
 			Contact newContact = new Contact();
 			Instance._contacts.Add(newContact);
@@ -111,11 +145,10 @@ namespace AddressBook
 		/// <summary>
 		/// Save all contact data to the program's internal data file
 		/// </summary>
-		public static void SaveToDataFile()
+		public static void SaveToContactDataFile()
 		{
-			FileStream stream = new FileStream("Contacts.dat", FileMode.Create);
-			BinaryFormatter formatter = new BinaryFormatter();
-
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream("Contacts.dat", FileMode.Create);		
 			try
 			{
 				formatter.Serialize(stream, Instance.Contacts);
@@ -125,11 +158,43 @@ namespace AddressBook
 				stream.Close();
 			}
 		}
+        /// <summary>
+        /// Save all case data to the program's internal data file
+        /// </summary>
+        public static void SaveToCaseDataFile()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream("Cases.dat", FileMode.Create);
+            try
+            {
+                formatter.Serialize(stream, Instance.Cases);
+            }
+            finally
+            {
+                stream.Close();
+            }
+        }
+        /// <summary>
+        /// Save all event data to the program's internal data file
+        /// </summary>
+        public static void SaveToEventDataFile()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream("Events.dat", FileMode.Create);
+            try
+            {
+                formatter.Serialize(stream, Instance.Events);
+            }
+            finally
+            {
+                stream.Close();
+            }
+        }
 
         /// <summary>
         /// Save all contact data to the program's internal CSV file
         /// </summary>
-        public static void SaveToCSVFile()
+        public static void SaveToContactCSVFile()
         {
             CsvFileDescription outputFileDescription = new CsvFileDescription
             {
@@ -144,6 +209,58 @@ namespace AddressBook
                 cc.Write(
                     Instance.Contacts,
                     "Contacts.csv",
+                    outputFileDescription
+                    );
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        /// <summary>
+        /// Save all case data to the program's internal CSV file
+        /// </summary>
+        public static void SaveToCaseCSVFile()
+        {
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                SeparatorChar = ',', // comma delimited
+                FirstLineHasColumnNames = true, // column names in first record
+                EnforceCsvColumnAttribute = true // Read and write only reads data fields into public fields and properties with the [CsvColumn] attribute
+            };
+            CsvContext cc = new CsvContext();
+
+            try
+            {
+                cc.Write(
+                    Instance.Cases,
+                    "Cases.csv",
+                    outputFileDescription
+                    );
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        /// <summary>
+        /// Save all event data to the program's internal CSV file
+        /// </summary>
+        public static void SaveToEventCSVFile()
+        {
+            CsvFileDescription outputFileDescription = new CsvFileDescription
+            {
+                SeparatorChar = ',', // comma delimited
+                FirstLineHasColumnNames = true, // column names in first record
+                EnforceCsvColumnAttribute = true // Read and write only reads data fields into public fields and properties with the [CsvColumn] attribute
+            };
+            CsvContext cc = new CsvContext();
+
+            try
+            {
+                cc.Write(
+                    Instance.Events,
+                    "Events.csv",
                     outputFileDescription
                     );
             }
@@ -184,6 +301,15 @@ namespace AddressBook
 			get { return _contacts; }
 		}
 
-		#endregion
-	}
+        public List<Event> Events
+        {
+            get { return _events; }
+        }
+
+        public List<Case> Cases
+        {
+            get { return _cases; }
+        }
+        #endregion
+    }
 }

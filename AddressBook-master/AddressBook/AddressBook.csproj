@@ -72,19 +72,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBook.cs" />
-    <Compile Include="AddressBookForm.cs">
+    <Compile Include="Case.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="frmContacts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddressBookForm.Designer.cs">
-      <DependentUpon>AddressBookForm.cs</DependentUpon>
+    <Compile Include="frmContacts.Designer.cs">
+      <DependentUpon>frmContacts.cs</DependentUpon>
     </Compile>
     <Compile Include="AddressBookFormGUIComponents.cs" />
     <Compile Include="Contact.cs" />
-    <Compile Include="ContactImage.cs">
+    <Compile Include="frmImageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ContactImage.Designer.cs">
-      <DependentUpon>ContactImage.cs</DependentUpon>
+    <Compile Include="frmImageBox.Designer.cs">
+      <DependentUpon>frmImageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEvents.Designer.cs">
+      <DependentUpon>frmEvents.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageHelper.cs" />
     <Compile Include="Main.cs" />
@@ -93,11 +101,11 @@
     <Compile Include="Provinces.cs" />
     <Compile Include="States.cs" />
     <Compile Include="Utilities.cs" />
-    <EmbeddedResource Include="AddressBookForm.resx">
-      <DependentUpon>AddressBookForm.cs</DependentUpon>
+    <EmbeddedResource Include="frmContacts.resx">
+      <DependentUpon>frmContacts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactImage.resx">
-      <DependentUpon>ContactImage.cs</DependentUpon>
+    <EmbeddedResource Include="frmImageBox.resx">
+      <DependentUpon>frmImageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -11,6 +11,7 @@ namespace AddressBook
 	[SerializableAttribute]
     public class Contact : IComparable
 	{
+        protected String _id;
 		private String _lastName;
 		private String _firstName;
 		private String _middleInitial;
@@ -36,7 +37,8 @@ namespace AddressBook
 		{
 			_lastName = "*";
 			_firstName = "*";
-			_birthday = new DateTime(1900, 1, 1);
+			_birthday = DateTime.Now;
+            _id = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
 		}
 
         /// <summary>
@@ -135,6 +137,11 @@ namespace AddressBook
         #endregion
 
         #region Properties
+        [CsvColumn(Name = "ID")]
+        public String ID
+        {
+            get { return _id; }
+        }
         public String Name
 		{
 			get { return String.Format("{0}, {1} {2}.", _lastName, _firstName, _middleInitial); }

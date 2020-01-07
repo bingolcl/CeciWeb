@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace AddressBook
 {
-	public partial class AddressBookForm : Form
+	public partial class frmContacts : Form
 	{
-		public AddressBookForm()
+		public frmContacts()
 		{
 			InitializeComponent();
             System.IO.Directory.CreateDirectory("photos");
@@ -124,7 +124,7 @@ namespace AddressBook
 			phoneNumberAlternateTextBox.Text = String.Empty;
 			emailTextBox.Text = String.Empty;
 
-			birthdayDateTimePicker.Value = new DateTime(1900, 1, 1);
+			birthdayDateTimePicker.Value = DateTime.Now;
 
 			cobProv.SelectedIndex = cobProv.FindStringExact(StateArray.Abbreviations()[0]);
 		}
@@ -172,8 +172,8 @@ namespace AddressBook
 			PopulateContactListBox();
 			SetComponentControlsEnabled(AddressBookFormGUIComponents.ContactListBox);
 
-            AddressBook.SaveToDataFile();
-            AddressBook.SaveToCSVFile();
+            AddressBook.SaveToContactDataFile();
+            AddressBook.SaveToContactCSVFile();
 		}
 
 		private void contactListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -283,7 +283,7 @@ namespace AddressBook
             /* Populate the image from the contact info */
             Contact selectedContact = AddressBook.Instance.Contacts[contactListBox.SelectedIndex];
             Image i = selectedContact.Portraits[listPhotos.SelectedIndex];
-            ContactImage imageForm = new ContactImage(i);
+            frmImageBox imageForm = new frmImageBox(i);
             DialogResult result = imageForm.ShowDialog();
         }
 

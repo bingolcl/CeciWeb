@@ -13,7 +13,7 @@ namespace AddressBook
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new AddressBookForm());
+			Application.Run(new frmContacts());
 		}
 	}
 }

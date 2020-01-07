@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace AddressBook
 {
-    public partial class ContactImage : Form
+    public partial class frmImageBox : Form
     {
-        public ContactImage(Image i)
+        public frmImageBox(Image i)
         {
             InitializeComponent();            
             ptbContact.Image = LoadImage( i, this);
